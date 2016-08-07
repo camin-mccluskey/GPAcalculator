@@ -1,0 +1,75 @@
+<!-- Programme to calculate maximum achievable gpa given classes taken and credits awarded
+for said classes -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>GPA Calculator</title>
+<meta name="description" content="Free GPA Calculator">
+<meta name="keywords" content="GPA,College,Calculator">
+<meta name="author" content="Camin McCluskey">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+<link rel="stylesheet" href="gpastyle.css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <div class="pagegradient">
+  <h1 style = "color:#870909; text-align: center"> GPA Calculator </h1>
+  <p></p>
+<div style="text-align: center">
+    My Current GPA is : <input type = "number" id= "gpa" placeholder="GPA"></input>
+    <p></p>
+    I Have Completed : <input type = "number" id= "Credits" placeholder="Possible Credits"></input>
+    Credits Hours So Far.
+    <p></p>
+    This New
+    <select id = "period">
+        <option value="semester">semester<option>
+        <option value="year">year<option>
+        <option value="course">course<option>
+        </select>
+    Is Worth <input type="number" id="maxcredits" maxlength="3" placeholder="Maximum Credits"></input>
+      Credits.
+      <p></p>
+    My Target GPA is : <input type="number" id= "TargetGPA" placeholder="Target GPA"></input>
+      <p></p>
+    <button style="position:center" class="button" onclick="myFunction()">Can I Do It?</button>
+      <p id= "result"></p>
+</div>
+<script>
+function myFunction() {
+
+  var gpa = (document.getElementById("gpa").value) * 1;
+  var Credits = (document.getElementById("Credits").value) * 1;
+  var Targetgpa = (document.getElementById("TargetGPA").value) * 1;
+  var maxcredits = (document.getElementById("maxcredits").value) * 1;
+  var period = document.getElementById("period").value;
+
+  var currentpoints = gpa * Credits;
+  var points = (Targetgpa * (Credits + maxcredits)) - currentpoints;
+  var grade = (points / maxcredits);
+
+  function round(value, exp) {
+  if (typeof exp === 'undefined' || +exp === 0)
+  return Math.round(value);
+
+  value = +value;
+  exp = +exp;
+
+  if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0))
+  return NaN;
+
+  // Shift
+  value = value.toString().split('e');
+  value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp)));
+
+  // Shift back
+  value = value.toString().split('e');
+  return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
+  }
+  var grade = round(grade,3);
+var gpa = document.getElementById("gpa").value;
+var x = document.getElementById("result").innerHTML = "You'll need a " + grade + " average this " + period + ". Good Luck!";
+}
+</script>
+</div>
+</body>
+</html>
